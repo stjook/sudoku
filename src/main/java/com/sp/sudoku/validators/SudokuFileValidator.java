@@ -2,12 +2,13 @@ package com.sp.sudoku.validators;
 
 
 import com.sp.sudoku.Sudoku;
+import com.sp.sudoku.exception.SudokuValidationException;
 
 import java.io.File;
 
 public class SudokuFileValidator implements Validator {
 
-	public void validate(Sudoku sudoku) throws RuntimeException {
+	public void validate(Sudoku sudoku) {
 		File file = new File(sudoku.getFilePath());
 		if (file!=null && file.exists()) {
 			String name = file.getName();
@@ -15,9 +16,9 @@ public class SudokuFileValidator implements Validator {
 			if (sudoku.ALLOWED_FILE_EXTENTION.contains(extension))
 				return;
 			else
-				throw new RuntimeException("Invalid extention " + extension);
+				throw new SudokuValidationException(String.format("Invalid extention %s.", extension));
 		}
-		throw new RuntimeException("File does not exist.");
+		throw new SudokuValidationException("File does not exist.");
 	}
 
 }

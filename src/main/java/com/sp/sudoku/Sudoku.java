@@ -1,6 +1,7 @@
 package com.sp.sudoku;
 
 
+import com.sp.sudoku.exception.SudokuValidationException;
 import com.sp.sudoku.validators.SudokuFileValidator;
 import com.sp.sudoku.validators.SudokuDataValidator;
 import com.sp.sudoku.validators.Validator;
@@ -30,8 +31,8 @@ public class Sudoku {
 	public int validate() {
 		try {
 			VALIDATORS.stream().forEach(v -> v.validate(this));
-		} catch (RuntimeException e) {
-			e.printStackTrace();
+		} catch (SudokuValidationException ex) {
+			System.out.println(ex.getMessage());
 			return 0;
 		}
 		return 1;

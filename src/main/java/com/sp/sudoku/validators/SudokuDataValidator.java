@@ -2,6 +2,7 @@ package com.sp.sudoku.validators;
 
 import com.opencsv.CSVReader;
 import com.sp.sudoku.Sudoku;
+import com.sp.sudoku.exception.SudokuValidationException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class SudokuDataValidator implements Validator {
 	private static final int PUZZLE_SIZE = 9;
 	private static final int SUBBOX_SIZE = 3;
 
-	public void validate(Sudoku sudoku) throws RuntimeException {
+	public void validate(Sudoku sudoku) {
 		String[][] records = getRecords(sudoku.getFilePath());
 		validateRecords(records);
 	}
@@ -54,12 +55,12 @@ public class SudokuDataValidator implements Validator {
 						String item = records[row + startRow][col + startCol];
 						if (!item.trim().isEmpty()) {
 							if (subBox.contains(item))
-								throw new RuntimeException("SubBox is not valid");
+								throw new SudokuValidationException("SubBox is not valid");
 
 							if (ALLOWED_ITEMS.contains(item))
 								subBox.add(item);
 							else
-								throw new RuntimeException("SubBox is not valid");
+								throw new SudokuValidationException("SubBox is not valid");
 						}
 					}
 				}
@@ -72,7 +73,7 @@ public class SudokuDataValidator implements Validator {
 				   .filter(item -> !item.trim().isEmpty())
 				   .anyMatch(item -> (Collections.frequency(items, item) > 1 ||
 											  !ALLOWED_ITEMS.contains(item.trim()))))
-			throw new RuntimeException("Invalid item or duplicate found");
+			throw new SudokuValidationException("Invalid item or duplicate found");
 	}
 
 	private String[][] getRecords(final String filePath) {
@@ -85,7 +86,7 @@ public class SudokuDataValidator implements Validator {
 				i++;
 			}
 		} catch (IOException ex) {
-			throw new RuntimeException();
+			throw new SudokuValidationException(ex.getMessage());
 		}
 		return records;
 	}
