@@ -13,6 +13,8 @@ public class SudokuDataValidator implements Validator {
 
 	private static final Set<String> ALLOWED_ITEMS = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", ""));
 
+	private static final String INVALID_OR_DUPLICATE_EXCEPTION_MSG = "Invalid item or duplicate found.";
+
 	private static final int PUZZLE_SIZE = 9;
 	private static final int SUBBOX_SIZE = 3;
 
@@ -30,7 +32,7 @@ public class SudokuDataValidator implements Validator {
 	private void validateRows(String[][] records) {
 		for (int i = 0; i < PUZZLE_SIZE; i++) {
 			String[] row = records[i];
-			checkForInvalidOrDublicate(Arrays.asList(row));
+			checkForInvalidOrDuplicate(Arrays.asList(row));
 		}
 	}
 
@@ -40,7 +42,7 @@ public class SudokuDataValidator implements Validator {
 			String[] column = IntStream.range(0, PUZZLE_SIZE)
 									  .mapToObj(i -> records[i][index])
 									  .toArray(String[]::new);
-			checkForInvalidOrDublicate(Arrays.asList(column));
+			checkForInvalidOrDuplicate(Arrays.asList(column));
 		}
 	}
 
@@ -55,12 +57,12 @@ public class SudokuDataValidator implements Validator {
 						String item = records[row + startRow][col + startCol];
 						if (!item.trim().isEmpty()) {
 							if (subBox.contains(item))
-								throw new SudokuValidationException("Invalid item or duplicate found.");
+								throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
 
 							if (ALLOWED_ITEMS.contains(item))
 								subBox.add(item);
 							else
-								throw new SudokuValidationException("Invalid item or duplicate found.");
+								throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
 						}
 					}
 				}
@@ -68,12 +70,12 @@ public class SudokuDataValidator implements Validator {
 		}
 	}
 
-	private void checkForInvalidOrDublicate(final List<String> items) {
+	private void checkForInvalidOrDuplicate(final List<String> items) {
 		if(items.stream()
 				   .filter(item -> !item.trim().isEmpty())
 				   .anyMatch(item -> (Collections.frequency(items, item) > 1 ||
 											  !ALLOWED_ITEMS.contains(item.trim()))))
-			throw new SudokuValidationException("Invalid item or duplicate found.");
+			throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
 	}
 
 	private String[][] getRecords(final String filePath) {

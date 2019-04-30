@@ -14,11 +14,11 @@ public class SudokuDataValidatorTest {
 
 	private ClassLoader classLoader = getClass().getClassLoader();
 
-	private Validator sudokuDataValidator;
+	private Validator dataValidator;
 
 	@Before
 	public void setUp() {
-		sudokuDataValidator = new SudokuDataValidator();
+		dataValidator = new SudokuDataValidator();
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class SudokuDataValidatorTest {
 		Sudoku sudoku = new Sudoku(classLoader.getResource("ok/sudoku.csv").getPath());
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class SudokuDataValidatorTest {
 		Sudoku sudoku = new Sudoku(classLoader.getResource("ok/emptySudoku.txt").getPath());
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class SudokuDataValidatorTest {
 		thrown.expectMessage("Invalid item or duplicate found.");
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class SudokuDataValidatorTest {
 		thrown.expectMessage("Invalid item or duplicate found.");
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class SudokuDataValidatorTest {
 		thrown.expectMessage("Invalid item or duplicate found.");
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class SudokuDataValidatorTest {
 		thrown.expectMessage("Invalid item or duplicate found.");
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
 
 	@Test
@@ -91,8 +91,6 @@ public class SudokuDataValidatorTest {
 		thrown.expectMessage("no-exist-sudoku.csv (No such file or directory)");
 
 		// When
-		sudokuDataValidator.validate(sudoku);
+		dataValidator.validate(sudoku);
 	}
-
-
 }

@@ -14,11 +14,11 @@ public class SudokuFileValidatorTest {
 
 	private ClassLoader classLoader = getClass().getClassLoader();
 
-	private Validator sudokuFileValidator;
+	private Validator fileValidator;
 
 	@Before
 	public void setUp() {
-		sudokuFileValidator = new SudokuFileValidator();
+		fileValidator = new SudokuFileValidator();
 	}
 
 	@Test
@@ -27,7 +27,7 @@ public class SudokuFileValidatorTest {
 		Sudoku sudoku = new Sudoku(classLoader.getResource("ok/sudoku.csv").getPath());
 
 		// When
-		sudokuFileValidator.validate(sudoku);
+		fileValidator.validate(sudoku);
 	}
 
 	@Test
@@ -35,10 +35,10 @@ public class SudokuFileValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku(classLoader.getResource("error/sudoku.ext").getPath());
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("Invalid extention .ext.");
+		thrown.expectMessage("Invalid extention [.ext].");
 
 		// When
-		sudokuFileValidator.validate(sudoku);
+		fileValidator.validate(sudoku);
 	}
 
 	@Test
@@ -49,6 +49,6 @@ public class SudokuFileValidatorTest {
 		thrown.expectMessage("File does not exist.");
 
 		// When
-		sudokuFileValidator.validate(sudoku);
+		fileValidator.validate(sudoku);
 	}
 }
