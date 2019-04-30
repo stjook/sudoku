@@ -55,12 +55,12 @@ public class SudokuDataValidator implements Validator {
 						String item = records[row + startRow][col + startCol];
 						if (!item.trim().isEmpty()) {
 							if (subBox.contains(item))
-								throw new SudokuValidationException("SubBox is not valid");
+								throw new SudokuValidationException("Invalid item or duplicate found.");
 
 							if (ALLOWED_ITEMS.contains(item))
 								subBox.add(item);
 							else
-								throw new SudokuValidationException("SubBox is not valid");
+								throw new SudokuValidationException("Invalid item or duplicate found.");
 						}
 					}
 				}
@@ -73,7 +73,7 @@ public class SudokuDataValidator implements Validator {
 				   .filter(item -> !item.trim().isEmpty())
 				   .anyMatch(item -> (Collections.frequency(items, item) > 1 ||
 											  !ALLOWED_ITEMS.contains(item.trim()))))
-			throw new SudokuValidationException("Invalid item or duplicate found");
+			throw new SudokuValidationException("Invalid item or duplicate found.");
 	}
 
 	private String[][] getRecords(final String filePath) {
