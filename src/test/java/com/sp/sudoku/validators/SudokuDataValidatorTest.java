@@ -2,10 +2,13 @@ package com.sp.sudoku.validators;
 
 import com.sp.sudoku.Sudoku;
 import com.sp.sudoku.exception.SudokuValidationException;
+import org.hamcrest.core.StringContains;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import static org.hamcrest.CoreMatchers.startsWith;
 
 public class SudokuDataValidatorTest {
 
@@ -88,7 +91,7 @@ public class SudokuDataValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku("no-exist-sudoku.csv");
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("no-exist-sudoku.csv (No such file or directory)");
+		thrown.expectMessage(startsWith("no-exist-sudoku.csv"));
 
 		// When
 		dataValidator.validate(sudoku);

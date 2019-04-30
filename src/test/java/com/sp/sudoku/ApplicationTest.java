@@ -5,6 +5,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
 
 public class ApplicationTest {
@@ -35,6 +36,6 @@ public class ApplicationTest {
 		Application.main(args);
 
 		// Then
-		assertEquals("File is not provided.\n0", systemOutRule.getLog());
+		assertEquals("File is not provided." + System.lineSeparator() + "0", systemOutRule.getLog());
 	}
 }
