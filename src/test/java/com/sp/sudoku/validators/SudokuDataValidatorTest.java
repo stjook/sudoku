@@ -2,7 +2,6 @@ package com.sp.sudoku.validators;
 
 import com.sp.sudoku.Sudoku;
 import com.sp.sudoku.exception.SudokuValidationException;
-import org.hamcrest.core.StringContains;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
