@@ -14,6 +14,7 @@ public class SudokuDataValidator implements Validator {
 	private static final Set<String> ALLOWED_ITEMS = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", ""));
 
 	private static final String INVALID_OR_DUPLICATE_EXCEPTION_MSG = "Invalid item or duplicate found.";
+	private static final String INVALID_PUZZLE_SIZE = "Invalid puzzle size.";
 
 	private static final int PUZZLE_SIZE = 9;
 	private static final int SUBBOX_SIZE = 3;
@@ -79,14 +80,20 @@ public class SudokuDataValidator implements Validator {
 	}
 
 	private String[][] getRecords(final String filePath) {
-		String[][] records = new String[PUZZLE_SIZE][PUZZLE_SIZE];
+		String[][] records = new String[PUZZLE_SIZE][];
 		try (CSVReader csvReader = new CSVReader(new FileReader(filePath))) {
 			String[] values;
 			int i=0;
 			while ((values = csvReader.readNext()) != null) {
+				// check row size
+				if (values.length!=PUZZLE_SIZE)
+					throw new SudokuValidationException(INVALID_PUZZLE_SIZE);
 				records[i] = values;
 				i++;
 			}
+			// check column size
+			if (i!=PUZZLE_SIZE)
+				throw new SudokuValidationException(INVALID_PUZZLE_SIZE);
 		} catch (IOException ex) {
 			throw new SudokuValidationException(ex.getMessage());
 		}

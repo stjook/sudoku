@@ -8,6 +8,32 @@ A given Sudoku is **valid** if all of the following rules are fulfilled.
 1. Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
 1. The Sudoku board could be partially filled, where empty cells can be filled with an **empty character (space)** (or no-character).
 
+### Example of a valid Sudoku
+```csv
+ , , ,9,1,7, , ,8
+ , ,5, , ,4, , ,2
+ , , , , , ,4,9,
+6,5, ,3, ,1, ,2,4
+1,4, ,8, ,9, ,6,3
+8,3, ,4, ,5, ,1,9
+ ,7,8, , , , , ,
+4, , ,5, , ,6, ,
+5, , ,7,4,8, , ,
+```
+
+### Example of an invalid Sudoku (includes duplicate in first row)
+```csv
+9, , ,9,1,7, , ,8
+ , ,5, , ,4, , ,2
+ , , , , , ,4,9,
+6,5, ,3, ,1, ,2,4
+1,4, ,8, ,9, ,6,3
+8,3, ,4, ,5, ,1,9
+ ,7,8, , , , , ,
+4, , ,5, , ,6, ,
+5, , ,7,4,8, , ,
+```
+
 ## Project Structure
 | Directory           | Description     |
 | ------------------- |:---------------:|
@@ -40,6 +66,7 @@ In order to generate the test-coverage report you can run the following:
 mvn clean test
 ```
 The generated reports can be found in ```./target/site/jacoco/index.html```.
+eg. ![Test Coverage](doc/images/jacoco_report.png)
 
 ## Out of Scope
 It is out of scope the check if a given sudoku is **solvable** or not. Solvable means that the given sudoku has one and only one solution.

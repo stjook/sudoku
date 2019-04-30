@@ -95,4 +95,26 @@ public class SudokuDataValidatorTest {
 		// When
 		dataValidator.validate(sudoku);
 	}
+
+	@Test
+	public void givenInvalidPuzzleSize1_whenValidate_thenThrowException() {
+		// Given
+		Sudoku sudoku = new Sudoku(classLoader.getResource("error/invalidPuzzleSize1.csv").getPath());
+		thrown.expect(SudokuValidationException.class);
+		thrown.expectMessage("Invalid puzzle size.");
+
+		// When
+		dataValidator.validate(sudoku);
+	}
+
+	@Test
+	public void givenInvalidPuzzleSize2_whenValidate_thenThrowException() {
+		// Given
+		Sudoku sudoku = new Sudoku(classLoader.getResource("error/invalidPuzzleSize2.csv").getPath());
+		thrown.expect(SudokuValidationException.class);
+		thrown.expectMessage("Invalid puzzle size.");
+
+		// When
+		dataValidator.validate(sudoku);
+	}
 }
