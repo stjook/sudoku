@@ -37,8 +37,7 @@ A given Sudoku is **valid** if all of the following rules are fulfilled.
 ## Project Structure
 | Directory           | Description     |
 | ------------------- |:---------------:|
-|./build              | Build script (validateSudoku.bat) and the generated sudoku-validator-1.0-SNAPSHOT.jar|
-|./build/libs         | External libraries that are dependencies for the sudoku validator.|
+|./run                | Run script (validateSudoku.bat)|
 |./src                | The source code.|
   
 ## How to compile
