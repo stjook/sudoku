@@ -26,9 +26,9 @@ public final class Sudoku {
 <span class="fc" id="L26">			Arrays.stream(validators).forEach(v -&gt; v.validate(this));</span>
 <span class="fc" id="L27">		} catch (SudokuValidationException ex) {</span>
 <span class="fc" id="L28">			System.out.println(ex.getMessage());</span>
-<span class="fc" id="L29">			return 0;</span>
+<span class="fc" id="L29">			return 1;</span>
 <span class="fc" id="L30">		}</span>
-<span class="fc" id="L31">		return 1;</span>
+<span class="fc" id="L31">		return 0;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

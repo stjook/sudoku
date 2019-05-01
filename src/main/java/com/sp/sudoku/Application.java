@@ -11,7 +11,7 @@ public class Application {
 			System.out.print(sudoku.validate());
 		} catch (IndexOutOfBoundsException ex) {
 			System.out.println("File is not provided.");
-			System.out.print("0");
+			System.out.print("1");
 		}
 	}
 

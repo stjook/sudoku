@@ -26,8 +26,8 @@ public final class Sudoku {
 			Arrays.stream(validators).forEach(v -> v.validate(this));
 		} catch (SudokuValidationException ex) {
 			System.out.println(ex.getMessage());
-			return 0;
+			return 1;
 		}
-		return 1;
+		return 0;
 	}
 }

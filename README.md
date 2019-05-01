@@ -1,6 +1,6 @@
 # Sudoku Validator 
-Sudoku Validator is a command line java application that validates a sudoku which is given in a csv (.csv or .txt) file.
-
+Sudoku Validator is a command line java application that validates a sudoku which is given in a csv (.csv or .txt) file. In case of a valid Sudoku the validator returns **0** and non-zero for an invalid one.
+ 
 ## Sudoku validation rules
 A given Sudoku is **valid** if all of the following rules are fulfilled.
 1. Each row must contain the digits 1-9 without repetition
