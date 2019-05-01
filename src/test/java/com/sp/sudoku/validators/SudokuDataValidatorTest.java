@@ -46,7 +46,7 @@ public class SudokuDataValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku(classLoader.getResource("error/dublicateInRowSudoku.csv").getPath());
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("Invalid item or duplicate found.");
+		thrown.expectMessage("Duplicate item found.");
 
 		// When
 		dataValidator.validate(sudoku);
@@ -57,7 +57,7 @@ public class SudokuDataValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku(classLoader.getResource("error/dublicateInColumnSudoku.csv").getPath());
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("Invalid item or duplicate found.");
+		thrown.expectMessage("Duplicate item found.");
 
 		// When
 		dataValidator.validate(sudoku);
@@ -68,7 +68,7 @@ public class SudokuDataValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku(classLoader.getResource("error/dublicateInSubBoxSudoku.csv").getPath());
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("Invalid item or duplicate found.");
+		thrown.expectMessage("Duplicate item found.");
 
 		// When
 		dataValidator.validate(sudoku);
@@ -79,7 +79,7 @@ public class SudokuDataValidatorTest {
 		// Given
 		Sudoku sudoku = new Sudoku(classLoader.getResource("error/invalidItemInSudoku.csv").getPath());
 		thrown.expect(SudokuValidationException.class);
-		thrown.expectMessage("Invalid item or duplicate found.");
+		thrown.expectMessage("Invalid item found.");
 
 		// When
 		dataValidator.validate(sudoku);

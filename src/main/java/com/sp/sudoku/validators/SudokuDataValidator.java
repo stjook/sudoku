@@ -13,7 +13,9 @@ public class SudokuDataValidator implements Validator {
 
 	private static final Set<String> ALLOWED_ITEMS = new HashSet<>(Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9", ""));
 
-	private static final String INVALID_OR_DUPLICATE_EXCEPTION_MSG = "Invalid item or duplicate found.";
+	// Exception Messages
+	private static final String DUPLICATE_ITEM = "Duplicate item found.";
+	private static final String INVALID_ITEM = "Invalid item found.";
 	private static final String INVALID_PUZZLE_SIZE = "Invalid puzzle size.";
 
 	private static final int PUZZLE_SIZE = 9;
@@ -25,15 +27,25 @@ public class SudokuDataValidator implements Validator {
 	}
 
 	private void validateRecords(String[][] records) {
+		validateItems(records);
 		validateRows(records);
 		validateColumns(records);
 		validateSubBoxes(records);
 	}
 
+	private void validateItems(String[][] records) {
+		for (int i = 0; i < PUZZLE_SIZE; i++) {
+			String[] row = records[i];
+			if(Arrays.stream(row).map(item -> item.trim())
+					.anyMatch(item -> !ALLOWED_ITEMS.contains(item)))
+				throw new SudokuValidationException(INVALID_ITEM);
+		}
+	}
+
 	private void validateRows(String[][] records) {
 		for (int i = 0; i < PUZZLE_SIZE; i++) {
 			String[] row = records[i];
-			checkForInvalidOrDuplicate(Arrays.asList(row));
+			checkForDuplicate(Arrays.asList(row));
 		}
 	}
 
@@ -43,7 +55,7 @@ public class SudokuDataValidator implements Validator {
 			String[] column = IntStream.range(0, PUZZLE_SIZE)
 									  .mapToObj(i -> records[i][index])
 									  .toArray(String[]::new);
-			checkForInvalidOrDuplicate(Arrays.asList(column));
+			checkForDuplicate(Arrays.asList(column));
 		}
 	}
 
@@ -57,13 +69,8 @@ public class SudokuDataValidator implements Validator {
 					for (int col = 0; col < SUBBOX_SIZE; col++) {
 						String item = records[row + startRow][col + startCol];
 						if (!item.trim().isEmpty()) {
-							if (subBox.contains(item))
-								throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
-
-							if (ALLOWED_ITEMS.contains(item))
-								subBox.add(item);
-							else
-								throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
+							if (!subBox.add(item))
+								throw new SudokuValidationException(DUPLICATE_ITEM);
 						}
 					}
 				}
@@ -71,12 +78,11 @@ public class SudokuDataValidator implements Validator {
 		}
 	}
 
-	private void checkForInvalidOrDuplicate(final List<String> items) {
-		if(items.stream()
-				   .filter(item -> !item.trim().isEmpty())
-				   .anyMatch(item -> (Collections.frequency(items, item) > 1 ||
-											  !ALLOWED_ITEMS.contains(item.trim()))))
-			throw new SudokuValidationException(INVALID_OR_DUPLICATE_EXCEPTION_MSG);
+	private void checkForDuplicate(final List<String> items) {
+		if(items.stream().map(item -> item.trim())
+				   .filter(item -> !item.isEmpty())
+				   .anyMatch(item -> (Collections.frequency(items, item) > 1)))
+			throw new SudokuValidationException(DUPLICATE_ITEM);
 	}
 
 	private String[][] getRecords(final String filePath) {
