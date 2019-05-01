@@ -1,0 +1,6 @@
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/exception/SudokuValidationException.java
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/validators/SudokuDataValidator.java
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/validators/Validator.java
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/validators/SudokuFileValidator.java
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/Application.java
+/home/spournar/personal_projects/sudoku/src/main/java/com/sp/sudoku/Sudoku.java
