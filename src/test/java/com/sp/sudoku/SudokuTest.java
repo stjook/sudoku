@@ -55,6 +55,6 @@ public class SudokuTest {
 		// Then
 		inOrder.verify(fileValidator, times(1)).validate(sudoku);
 		inOrder.verify(dataValidator, times(0)).validate(sudoku);
-		assertEquals(0, validationResult);
+		assertEquals(1, validationResult);
 	}
 }

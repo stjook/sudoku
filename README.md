@@ -1,6 +1,6 @@
 # Sudoku Validator 
-Sudoku Validator is a command line java application that validates a sudoku which is given in a csv (.csv or .txt) file.
-
+Sudoku Validator is a command line java application that validates a sudoku which is given in a csv (.csv or .txt) file. In case of a valid Sudoku the validator returns **0** and non-zero for an invalid one.
+ 
 ## Sudoku validation rules
 A given Sudoku is **valid** if all of the following rules are fulfilled.
 1. Each row must contain the digits 1-9 without repetition
@@ -37,8 +37,7 @@ A given Sudoku is **valid** if all of the following rules are fulfilled.
 ## Project Structure
 | Directory           | Description     |
 | ------------------- |:---------------:|
-|./build              | Build script (validateSudoku.bat) and the generated sudoku-validator-1.0-SNAPSHOT.jar|
-|./build/libs         | External libraries that are dependencies for the sudoku validator.|
+|./run                | Run script (validateSudoku.bat)|
 |./src                | The source code.|
   
 ## How to compile
@@ -55,7 +54,7 @@ mvn clean package
 By building the project we can find an executable jar file in ```./target/sudoku-validator-***-.jar``` as well as the required libraries in ```./target/libs/```.
 
 ## How to run the application
-Sudoku validator can be ran in Windows OS by runing from the build dir the following:
+Sudoku validator can be ran in Windows OS by running from the run dir the following:
 ```cmd
 validateSudoku.bat givenSudoku.txt
 ```
