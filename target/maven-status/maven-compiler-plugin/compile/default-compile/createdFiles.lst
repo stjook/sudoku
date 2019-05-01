@@ -1,6 +1,0 @@
-com/sp/sudoku/Sudoku.class
-com/sp/sudoku/Application.class
-com/sp/sudoku/exception/SudokuValidationException.class
-com/sp/sudoku/validators/SudokuDataValidator.class
-com/sp/sudoku/validators/Validator.class
-com/sp/sudoku/validators/SudokuFileValidator.class

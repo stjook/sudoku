@@ -1,6 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-sudoku-validator,com.sp.sudoku.exception,SudokuValidationException,0,4,0,0,0,2,0,1,0,1
-sudoku-validator,com.sp.sudoku,Application,3,34,0,0,1,7,1,1,1,1
-sudoku-validator,com.sp.sudoku,Sudoku,0,32,0,0,0,11,0,4,0,4
-sudoku-validator,com.sp.sudoku.validators,SudokuDataValidator,0,314,0,34,0,58,0,34,0,17
-sudoku-validator,com.sp.sudoku.validators,SudokuFileValidator,0,58,1,5,0,10,1,5,0,3
