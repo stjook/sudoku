@@ -3,16 +3,19 @@ package com.sp.sudoku;
 import com.sp.sudoku.exception.SudokuValidationException;
 import com.sp.sudoku.validators.SudokuDataValidator;
 import com.sp.sudoku.validators.SudokuFileValidator;
-import com.sp.sudoku.validators.Validator;
-import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.mockito.InOrder;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class SudokuTest {
+
+	@Rule
+	public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
 	private ClassLoader classLoader = getClass().getClassLoader();
 
@@ -55,6 +58,19 @@ public class SudokuTest {
 		// Then
 		inOrder.verify(fileValidator, times(1)).validate(sudoku);
 		inOrder.verify(dataValidator, times(0)).validate(sudoku);
+		assertEquals(1, validationResult);
+	}
+
+	@Test
+	public void givenNullValidatorsAndSudoku_whenValidate_thenPrintExceptionMsgAndReturn1() {
+		// Given
+		Sudoku sudoku = new Sudoku(classLoader.getResource("ok/sudoku.csv").getPath(), null);
+
+		// When
+		int validationResult = sudoku.validate();
+
+		// Then
+		assertEquals("It is not given any validator to be processed." + System.lineSeparator(), systemOutRule.getLog());
 		assertEquals(1, validationResult);
 	}
 }

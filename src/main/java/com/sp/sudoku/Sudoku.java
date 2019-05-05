@@ -23,7 +23,10 @@ public final class Sudoku {
 
 	public int validate() {
 		try {
-			Arrays.stream(validators).forEach(v -> v.validate(this));
+			if (validators!=null && validators.length>0) {
+				Arrays.stream(validators).forEach(v -> v.validate(this));
+			} else
+				throw new SudokuValidationException("It is not given any validator to be processed.");
 		} catch (SudokuValidationException ex) {
 			System.out.println(ex.getMessage());
 			return 1;
